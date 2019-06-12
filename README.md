@@ -1,5 +1,5 @@
 # Macmil UI Tests #
-This project automates UI tests of the responsive website with each scenario starting on the home page.
+This project automates UI tests of the responsive website in desktop and mobile mode with each scenario starting on the home page.
 It provides two scenarios:
 
 - filling of the sign up form
