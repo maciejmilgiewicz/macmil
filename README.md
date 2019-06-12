@@ -19,7 +19,7 @@ In order to execute the set of tests provided by this framework following prereq
 ## Execution ##
 Please follow the below steps to execute the test suite:
 
-- Clone the project repository from ...
+- Clone the project repository from here - ```git clone https://github.com/maciejmilgiewicz/macmil```
 - Open docker-compose.yml, which is in the project's root directory
 - Replace ```<HOMEPAGE_URL>``` placeholder in ```-Dtest.url='<HOMEPAGE_URL>'``` property within the .yml file to the home page URL of your website
 - Choose the mode in which you want the tests to be executed, e.g. ```-Dbrowser.viewport='DESKTOP'``` or ```-Dbrowser.viewport='MOBILE'```. This will automatically resize the browser, as needed
