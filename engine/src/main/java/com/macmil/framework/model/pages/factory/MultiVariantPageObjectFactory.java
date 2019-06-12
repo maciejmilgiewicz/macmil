@@ -12,12 +12,12 @@ public class MultiVariantPageObjectFactory {
     public <T extends BasePageObject> T create(Class<T> clazz) {
         T retval = null;
 
-        for (String variant : load_page_variants(clazz)) {
+        for (String variant : loadPageVariants(clazz)) {
             T instance;
 
             try {
                 instance = (T) Class.forName(variant).newInstance();
-                init_page_elements(instance);
+                initPageElements(instance);
                 if (instance.applies()) {
                     retval = instance;
                     break;
@@ -34,11 +34,11 @@ public class MultiVariantPageObjectFactory {
         return retval;
     }
 
-    private <T extends BasePageObject> List<String> load_page_variants(Class<T> clazz) {
+    private <T extends BasePageObject> List<String> loadPageVariants(Class<T> clazz) {
         return PageVariantReader.getPageVariants(clazz.getName());
     }
 
-    private <T extends BasePageObject> void init_page_elements(T instance) {
+    private <T extends BasePageObject> void initPageElements(T instance) {
         PageFactory.initElements(DriverManager.getInstance().getDriver(), instance);
     }
 }

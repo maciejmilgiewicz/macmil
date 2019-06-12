@@ -57,7 +57,6 @@ public class SignUpPage extends BasePageObject<SignUpPage> {
     }
 
     public SignUpPage selectCountryOfResidence() {
-        getBrowser().scrollPageDown();
         getBrowser().getElement(courtyOfResidenceDropDownArrow).click();
         getBrowser().getElement(countriesList).waitForDisplayed();
         countriesOfResidence.stream().findAny().ifPresent(WebElement::click);

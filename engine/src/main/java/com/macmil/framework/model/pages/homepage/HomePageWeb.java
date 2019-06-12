@@ -1,6 +1,5 @@
 package com.macmil.framework.model.pages.homepage;
 
-import com.macmil.framework.browser.dsl.elements.PageElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
