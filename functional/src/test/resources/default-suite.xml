@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="UI Tests Suite" preserve-order="true">
+    <test name="UI Tests">
+        <packages>
+            <package name="com.macmil.uitests"/>
+        </packages>
+    </test>
+</suite>

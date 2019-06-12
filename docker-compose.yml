@@ -1,0 +1,26 @@
+version: '3'
+services:
+  maven:
+    image: maven:3.6.1-jdk-8
+    stop_signal: SIGKILL
+    stdin_open: true
+    tty: true
+    working_dir: $PWD
+    volumes:
+      - $PWD:$PWD
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.m2:/root/.m2
+    command: bash -c "mvn clean verify -pl functional
+      -Dbrowser.remote_uri='http://selenium:4444/wd/hub'
+      -Dtest.url='<HOMEPAGE_URL>'
+      -Dbrowser.type='CHROME'
+      -Dbrowser.viewport='DESKTOP'
+      -Dskip.tests='false'"
+    depends_on:
+      - selenium
+  selenium:
+    image: selenium/standalone-chrome-debug:3.141.59-neon
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - "5900:5900"
