@@ -1,11 +1,8 @@
 # Macmil UI Tests #
 This project automates UI tests of the responsive website in desktop and mobile mode with each scenario starting on the home page.
-It provides two scenarios:
+It provides a scenario of checking the prices of particular items on the market page.
 
-- filling of the sign up form
-- and checking the prices of particular items on the market page
-
-The latter is run twice. Each time against a different item.
+This is run twice. Each time against a different item.
 
 The project is based on Maven, Selenium, Cucumber and TestNG and is fully Docker'ised.
 
@@ -34,6 +31,8 @@ selenium:
 - Selenium container browser can be observed for debugging purposes via VNC viewer on ```vnc://<HOST_IP>:<VNC_HOST_PORT>```, e.g. ```vnc://localhost:5900```. The VCN password is **secret**
 - To tear the containers after tests please run ```docker-compose stop``` followed by ```docker-compose rm```
 - Cucumber report can be found in ```./target/cucumber-reports/index.html```
+
+If an error about missing engine dependency appears, please run `mvn clean install` against the engine module.
 
 ## Author ##
 Maciej Milgiewicz
