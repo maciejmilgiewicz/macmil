@@ -3,25 +3,20 @@ package com.macmil.framework.model.pages.homepage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class HomePageMob extends HomePage {
     @FindBy(css = ".mobile-header-top")
     private WebElement mobileHeader;
 
-    @FindBy(css = ".mobile-nav")
-    private WebElement mobilenav;
-
     @FindBy(css = ".hamburger")
     private WebElement mobileMenuButton;
 
-    @FindBy(css = ".account-links a[href='/signup']")
+    @FindBy(css = "a[data-testid='sign-up']")
     private WebElement createAccountButton;
 
-    @FindBy(css = "nav .primary a")
-    private List<WebElement> primaryMenuItems;
+    @FindBy(css = "a[href='/prices']")
+    private WebElement pricesLink;
 
-    @FindBy(css = ".warning-container .accept")
+    @FindBy(css = ".kraken-cookie-warning button")
     private WebElement cookiesAcceptButton;
 
     @Override
@@ -34,12 +29,7 @@ public class HomePageMob extends HomePage {
     @Override
     public HomePage clickPricesLink() {
         getBrowser().getButton(mobileMenuButton).click();
-        getBrowser().getElement(mobilenav).waitForDisplayed();
-        primaryMenuItems.stream()
-                .filter(item -> item.getText().equals(PRICES))
-                .findFirst()
-                .ifPresent(l -> getBrowser().getLink(l).waitForEnabled().and().click());
-        getBrowser().switchToNewWindow();
+        getBrowser().getLink(pricesLink).waitForEnabled().and().click();
         return this;
     }
 

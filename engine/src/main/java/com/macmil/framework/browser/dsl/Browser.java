@@ -44,6 +44,10 @@ public class Browser {
         new WebDriverWait(driver, TIMEOUT).until(input -> isPageComplete(getReadyState(driver)));
     }
 
+    public void waitForPageAction(long seconds) {
+        window.waitForWindowAction(seconds);
+    }
+
     private boolean isPageComplete(String readyState) {
         return "complete".equals(readyState);
     }

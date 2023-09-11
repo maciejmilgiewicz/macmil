@@ -8,13 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class SignUpPage extends BasePageObject<SignUpPage> {
-    @FindBy(css = "input[name='email']")
+    @FindBy(css = "input[data-testid='signup-email-field']")
     private WebElement emailField;
 
-    @FindBy(css = "input[name='username']")
+    @FindBy(css = "input[data-testid='signup-username-field']")
     private WebElement usernameField;
 
-    @FindBy(css = "input[name='password']")
+    @FindBy(css = "input[data-testid='signup-password-field']")
     private WebElement passwordField;
 
     @FindBy(css = ".Select .Select-arrow")
@@ -29,7 +29,7 @@ public class SignUpPage extends BasePageObject<SignUpPage> {
     @FindBy(css = ".input-checkbox")
     private WebElement termsCheckbox;
 
-    @FindBy(css = "button.button")
+    @FindBy(css = "button[data-testid='confirm button']")
     private WebElement createAccountButton;
 
     public static SignUpPage open(String url) {

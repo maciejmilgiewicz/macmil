@@ -6,28 +6,27 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class HomePageWeb extends HomePage {
-    @FindBy(css = ".top-nav")
+    @FindBy(css = "nav")
     private WebElement topnav;
 
-    @FindBy(css = "nav .primary a")
+    @FindBy(css = "nav a")
     private List<WebElement> primaryMenuItems;
 
-    @FindBy(css = "nav a[href='/signup']")
+    @FindBy(css = "li[data-testid='top-nav-Prices'] a[href='/prices']")
+    private WebElement pricesLink;
+
+    @FindBy(css = "a[data-testid='sign-up']")
     private WebElement createAccountButton;
 
     @Override
     public  HomePage clickCreateAccountButton() {
-        getBrowser().getButton(createAccountButton).click();
+        getBrowser().getButton(createAccountButton).waitForEnabled().and().click();
         return this;
     }
 
     @Override
     public HomePage clickPricesLink() {
-        primaryMenuItems.stream()
-                .filter(item -> item.getText().equals(PRICES))
-                .findFirst()
-                .ifPresent(l -> getBrowser().getLink(l).waitForEnabled().and().click());
-        getBrowser().switchToNewWindow();
+        getBrowser().getLink(pricesLink).waitForEnabled().and().click();
         return this;
     }
 

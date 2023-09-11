@@ -51,8 +51,8 @@ public class UITests {
         Assert.assertTrue(SignUpPage.waitForPage().and().isCreateAccountButtonEnabled(), "Create account button is not enabled");
     }
 
-    @When("^i navigate to markets page$")
-    public void iNavigateToMarketsPage() {
+    @When("^i navigate to prices page$")
+    public void iNavigateToPricesPage() {
         HomePage.waitForPage().clickPricesLink();
     }
 

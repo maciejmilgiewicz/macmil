@@ -6,21 +6,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MarketsPage extends BasePageObject<MarketsPage> {
-    private static final String ASSETS = "Assets";
+    private static final String ASSETS = "All assets";
 
-    @FindBy(css = ".filter-bar-item .menu-item")
-    private List<WebElement> filterBarItems;
+    @FindBy(css = "input[placeholder='Search all cryptocurrencies']")
+    private WebElement searchCryptoInput;
 
-    @FindBy(id = "rankingsMenuAssets")
-    private WebElement assetsFilterMenu;
+    @FindBy(css = "ul li button")
+    private List<WebElement> buttons;
 
-    @FindBy(css = ".search-menu-row")
-    private List<WebElement> assetsFilters;
-
-    @FindBy(css = ".rankings-list-price")
+    @FindBy(css = "table tbody tr td:nth-child(3) span")
     private List<WebElement> prices;
 
     public static MarketsPage open(String url) {
@@ -33,28 +29,27 @@ public class MarketsPage extends BasePageObject<MarketsPage> {
     }
 
     public MarketsPage filterAsset(String asset) {
-        filterBarItems.stream()
+        buttons.stream()
                 .filter(item -> item.getText().equals(ASSETS))
                 .findFirst()
                 .ifPresent(b -> getBrowser().getButton(b).waitForEnabled().and().click());
-        getBrowser().getElement(assetsFilterMenu).waitForDisplayed();
-        assetsFilters.stream()
-                .filter(item -> item.getAttribute("data-value").equalsIgnoreCase(asset))
-                .findFirst()
-                .ifPresent(b -> getBrowser().getButton(b).waitForEnabled().and().click());
+        getBrowser().getTextField(searchCryptoInput).type(asset);
+        getBrowser().waitForPageAction(5);
         return this;
     }
 
     public boolean areAllPricesMoreThanZero() {
+        prices.forEach(price -> getBrowser().getElement(price).waitForEnabled());
         return prices.stream()
-                .filter(price -> Double.valueOf(price.getText()) <= 0)
-                .collect(Collectors.toList())
-                .isEmpty();
+                .noneMatch(p -> Double.parseDouble(p.getText()
+                        .replaceFirst("^£", "")
+                        .replaceAll(",", "")) <= 0);
     }
 
     @Override
     public boolean applies() {
         getBrowser().waitForPageToLoad();
+        getBrowser().getElement(searchCryptoInput).waitForEnabled();
         return true;
     }
 }

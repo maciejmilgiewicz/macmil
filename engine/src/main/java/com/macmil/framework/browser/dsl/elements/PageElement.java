@@ -2,6 +2,7 @@ package com.macmil.framework.browser.dsl.elements;
 
 import com.google.common.base.Preconditions;
 import com.macmil.framework.webdriver.DriverManager;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -32,8 +33,23 @@ public class PageElement {
         return this;
     }
 
+    public PageElement jsClick() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Preconditions.checkState(isEnabled(), "Element " + webElement + " could not be clicked, since it's not enabled!");
+        jsExecutor.executeScript("arguments[0].click();", webElement);
+        return this;
+    }
+
     public PageElement focus() {
-        new Actions(driver).moveToElement(webElement).perform();
+//        new Actions(driver).moveToElement(webElement).perform();
+        scrollIntoView();
+        waitForDisplayed();
+        return this;
+    }
+
+    public PageElement scrollIntoView() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView();", webElement);
         return this;
     }
 
